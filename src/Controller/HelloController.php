@@ -6,12 +6,14 @@ use App\Taxes\Calculator;
 use App\Taxes\Detector;
 use Cocur\Slugify\Slugify;
 use Psr\Log\LoggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
-class HelloController {
+class HelloController extends AbstractController {
+
 
     /**
      * @Route("/hello/{name<[A-z]+>?World}",
@@ -21,20 +23,8 @@ class HelloController {
      *     schemes={"http", "https"},
      * )
      */
-    public function hello($name = "World", LoggerInterface $logger, Calculator $calculator, Slugify $slugify, Environment $twig, Detector $detector) {
+    public function hello($name = "World") {
 
-        dump($detector->detect(1000));
-        dump($detector->detect(10));
-
-        dump(($twig));
-
-        dump($slugify->slugify("Hello World"));
-
-        $logger->error("Mon message de log !");
-
-        $tva = $calculator->calcul(100);
-        dump($tva);
-
-        return new Response("Hello $name");
+        return $this->render();
     }
 }
